@@ -26,7 +26,7 @@ namespace EmployeeManagementAPI.Models
         [Column("role")]
         public string Role { get; set; }
 
-        [Column("hire_time")]
-        public DateTime HireTime { get; set; }
+        [Column("hire_date")]
+        public DateOnly HireDate { get; set; }
     }
 }

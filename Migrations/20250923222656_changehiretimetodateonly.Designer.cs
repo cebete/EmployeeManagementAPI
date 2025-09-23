@@ -3,6 +3,7 @@ using System;
 using EmployeeManagementAPI.Data;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore.Infrastructure;
+using Microsoft.EntityFrameworkCore.Migrations;
 using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 using Npgsql.EntityFrameworkCore.PostgreSQL.Metadata;
 
@@ -11,9 +12,11 @@ using Npgsql.EntityFrameworkCore.PostgreSQL.Metadata;
 namespace EmployeeManagementAPI.Migrations
 {
     [DbContext(typeof(AppDbContext))]
-    partial class AppDbContextModelSnapshot : ModelSnapshot
+    [Migration("20250923222656_changehiretimetodateonly")]
+    partial class changehiretimetodateonly
     {
-        protected override void BuildModel(ModelBuilder modelBuilder)
+        /// <inheritdoc />
+        protected override void BuildTargetModel(ModelBuilder modelBuilder)
         {
 #pragma warning disable 612, 618
             modelBuilder
@@ -41,9 +44,9 @@ namespace EmployeeManagementAPI.Migrations
                         .HasColumnType("text")
                         .HasColumnName("email");
 
-                    b.Property<DateOnly>("HireDate")
+                    b.Property<DateOnly>("HireTime")
                         .HasColumnType("date")
-                        .HasColumnName("hire_date");
+                        .HasColumnName("hire_time");
 
                     b.Property<string>("Name")
                         .IsRequired()

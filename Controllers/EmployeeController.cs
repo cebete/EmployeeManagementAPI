@@ -1,4 +1,5 @@
-﻿using EmployeeManagementAPI.Data;
+﻿using System.Text.RegularExpressions;
+using EmployeeManagementAPI.Data;
 using EmployeeManagementAPI.Models.Entities;
 using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Http;
@@ -16,11 +17,29 @@ namespace EmployeeManagementAPI.Controllers
         public EmployeeController(AppDbContext dbContext) =>
             _dbContext = dbContext;
 
+        private bool IsValidEmail(string email)
+        {
+            if (string.IsNullOrWhiteSpace(email))
+            {
+                return false;
+            }
+
+            var pattern = @"^[^@\s]+@[^@\s]+\.[^@\s]+$";z
+            return Regex.IsMatch(email, pattern, RegexOptions.IgnoreCase);
+        }
+
         [HttpGet]
         public async Task<ActionResult<IEnumerable<Employee>>> Get(
             [FromQuery] string? sortBy = null,
-            [FromQuery] string? order = "asc") // default ascending
+            [FromQuery] string? order = "asc",
+            [FromQuery] int pageNumber = 1,
+            [FromQuery] int pageSize = 10) // default ascending
         {
+            if (pageNumber < 0 || pageSize < 0)
+            {
+                return BadRequest("Page number and page size must be greater than zero.");
+            }
+
             IQueryable<Employee> query = _dbContext.Employees;
 
             switch (sortBy?.ToLower())
@@ -42,8 +61,23 @@ namespace EmployeeManagementAPI.Controllers
                     break;
             }
 
-            var employees = await query.ToListAsync();
-            return Ok(employees);
+            // Total count before applying
+            var totalCount = await query.CountAsync();
+
+            // Paging
+
+            var employees = await query
+                .Skip((pageNumber -1) * pageSize)
+                .Take(pageSize)
+                .ToListAsync();
+
+            return Ok(new
+            {
+                TotalCount = totalCount,
+                PageNumber = pageNumber,
+                PageSize = pageSize,
+                Data = employees
+            });
         }
 
         [HttpGet("hired")]
@@ -94,9 +128,14 @@ namespace EmployeeManagementAPI.Controllers
         [HttpPost]
         public async Task<ActionResult> Create([FromBody] Employee employee)
         {
-            if (string.IsNullOrEmpty(employee.Name) || string.IsNullOrEmpty(employee.Email) || string.IsNullOrEmpty(employee.Department))
+            if (string.IsNullOrEmpty(employee.Name) || string.IsNullOrEmpty(employee.Email) || string.IsNullOrEmpty(employee.Department) || employee.HireDate > DateOnly.FromDateTime(DateTime.Today))
             {
                 return BadRequest("Invalid Request");
+            }
+
+            if (!IsValidEmail(employee.Email))
+            {
+                return BadRequest("Invalid Request: Email format is not valid.");
             }
 
             var existingEmployee = await _dbContext.Employees
@@ -121,7 +160,7 @@ namespace EmployeeManagementAPI.Controllers
         [HttpPut]
         public async Task<ActionResult> Update([FromBody] Employee employee)
         {
-            if (employee.Id == 0 || string.IsNullOrEmpty(employee.Name) || string.IsNullOrEmpty(employee.Email) || string.IsNullOrEmpty(employee.Department))
+            if (employee.Id == 0 || string.IsNullOrEmpty(employee.Name) || string.IsNullOrEmpty(employee.Email) || string.IsNullOrEmpty(employee.Department) || employee.HireDate > DateOnly.FromDateTime(DateTime.Today))
             {
                 return BadRequest("Invalid Request");
             }

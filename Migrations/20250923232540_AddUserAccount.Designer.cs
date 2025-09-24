@@ -3,6 +3,7 @@ using System;
 using EmployeeManagementAPI.Data;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore.Infrastructure;
+using Microsoft.EntityFrameworkCore.Migrations;
 using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 using Npgsql.EntityFrameworkCore.PostgreSQL.Metadata;
 
@@ -11,9 +12,11 @@ using Npgsql.EntityFrameworkCore.PostgreSQL.Metadata;
 namespace EmployeeManagementAPI.Migrations
 {
     [DbContext(typeof(AppDbContext))]
-    partial class AppDbContextModelSnapshot : ModelSnapshot
+    [Migration("20250923232540_AddUserAccount")]
+    partial class AddUserAccount
     {
-        protected override void BuildModel(ModelBuilder modelBuilder)
+        /// <inheritdoc />
+        protected override void BuildTargetModel(ModelBuilder modelBuilder)
         {
 #pragma warning disable 612, 618
             modelBuilder
@@ -84,15 +87,6 @@ namespace EmployeeManagementAPI.Migrations
                     b.HasKey("Id");
 
                     b.ToTable("user_account");
-
-                    b.HasData(
-                        new
-                        {
-                            Id = 1,
-                            Name = "Administrator",
-                            Password = "AQAAAAIAAYagAAAAELKMG82UZs23uDVWAxVrbnNNcZZu4P9sqi538pL0aDE9JPxKo41RoQosBxB/IZ+O0g==",
-                            UserName = "admin"
-                        });
                 });
 #pragma warning restore 612, 618
         }

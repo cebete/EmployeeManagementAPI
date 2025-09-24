@@ -1,5 +1,6 @@
 ﻿using EmployeeManagementAPI.Data;
-using EmployeeManagementAPI.Models;
+using EmployeeManagementAPI.Models.Entities;
+using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Http;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.EntityFrameworkCore;
@@ -89,6 +90,7 @@ namespace EmployeeManagementAPI.Controllers
             return await _dbContext.Employees.FirstOrDefaultAsync(x => x.Id == id);
         }
 
+        [Authorize]
         [HttpPost]
         public async Task<ActionResult> Create([FromBody] Employee employee)
         {
@@ -115,6 +117,7 @@ namespace EmployeeManagementAPI.Controllers
             return CreatedAtAction(nameof(GetById), new { id = employee.Id }, employee);
         }
 
+        [Authorize]
         [HttpPut]
         public async Task<ActionResult> Update([FromBody] Employee employee)
         {
@@ -141,6 +144,7 @@ namespace EmployeeManagementAPI.Controllers
             return Ok();
         }
 
+        [Authorize]
         [HttpDelete("{id}")]
         public async Task<ActionResult> Delete(int id)
         {

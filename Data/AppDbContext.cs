@@ -1,4 +1,5 @@
-﻿using EmployeeManagementAPI.Models;
+﻿using EmployeeManagementAPI.Handlers;
+using EmployeeManagementAPI.Models.Entities;
 using Microsoft.EntityFrameworkCore;
 
 
@@ -13,5 +14,6 @@ namespace EmployeeManagementAPI.Data
         }
 
         public DbSet<Employee> Employees { get; set; }
+        public DbSet<UserAccount> UserAccounts { get; set; }
     }
 }

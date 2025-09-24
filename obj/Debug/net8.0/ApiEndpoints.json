@@ -1,5 +1,31 @@
 [
   {
+    "ContainingType": "EmployeeManagementAPI.Controllers.AccountController",
+    "Method": "Login",
+    "RelativePath": "api/Account/Login",
+    "HttpMethod": "POST",
+    "IsController": true,
+    "Order": 0,
+    "Parameters": [
+      {
+        "Name": "request",
+        "Type": "EmployeeManagementAPI.Models.Api.LoginRequestModel",
+        "IsRequired": true
+      }
+    ],
+    "ReturnTypes": [
+      {
+        "Type": "EmployeeManagementAPI.Models.Api.LoginResponseModel",
+        "MediaTypes": [
+          "text/plain",
+          "application/json",
+          "text/json"
+        ],
+        "StatusCode": 200
+      }
+    ]
+  },
+  {
     "ContainingType": "EmployeeManagementAPI.Controllers.EmployeeController",
     "Method": "Get",
     "RelativePath": "api/Employee",
@@ -20,7 +46,7 @@
     ],
     "ReturnTypes": [
       {
-        "Type": "System.Collections.Generic.IEnumerable\u00601[[EmployeeManagementAPI.Models.Employee, EmployeeManagementAPI, Version=1.0.0.0, Culture=neutral, PublicKeyToken=null]]",
+        "Type": "System.Collections.Generic.IEnumerable\u00601[[EmployeeManagementAPI.Models.Entities.Employee, EmployeeManagementAPI, Version=1.0.0.0, Culture=neutral, PublicKeyToken=null]]",
         "MediaTypes": [
           "text/plain",
           "application/json",
@@ -40,7 +66,7 @@
     "Parameters": [
       {
         "Name": "employee",
-        "Type": "EmployeeManagementAPI.Models.Employee",
+        "Type": "EmployeeManagementAPI.Models.Entities.Employee",
         "IsRequired": true
       }
     ],
@@ -56,7 +82,7 @@
     "Parameters": [
       {
         "Name": "employee",
-        "Type": "EmployeeManagementAPI.Models.Employee",
+        "Type": "EmployeeManagementAPI.Models.Entities.Employee",
         "IsRequired": true
       }
     ],
@@ -78,7 +104,7 @@
     ],
     "ReturnTypes": [
       {
-        "Type": "EmployeeManagementAPI.Models.Employee",
+        "Type": "EmployeeManagementAPI.Models.Entities.Employee",
         "MediaTypes": [
           "text/plain",
           "application/json",
@@ -120,7 +146,7 @@
     ],
     "ReturnTypes": [
       {
-        "Type": "System.Collections.Generic.IEnumerable\u00601[[EmployeeManagementAPI.Models.Employee, EmployeeManagementAPI, Version=1.0.0.0, Culture=neutral, PublicKeyToken=null]]",
+        "Type": "System.Collections.Generic.IEnumerable\u00601[[EmployeeManagementAPI.Models.Entities.Employee, EmployeeManagementAPI, Version=1.0.0.0, Culture=neutral, PublicKeyToken=null]]",
         "MediaTypes": [
           "text/plain",
           "application/json",
@@ -151,7 +177,7 @@
     ],
     "ReturnTypes": [
       {
-        "Type": "System.Collections.Generic.IEnumerable\u00601[[EmployeeManagementAPI.Models.Employee, EmployeeManagementAPI, Version=1.0.0.0, Culture=neutral, PublicKeyToken=null]]",
+        "Type": "System.Collections.Generic.IEnumerable\u00601[[EmployeeManagementAPI.Models.Entities.Employee, EmployeeManagementAPI, Version=1.0.0.0, Culture=neutral, PublicKeyToken=null]]",
         "MediaTypes": [
           "text/plain",
           "application/json",
@@ -160,5 +186,99 @@
         "StatusCode": 200
       }
     ]
+  },
+  {
+    "ContainingType": "EmployeeManagementAPI.Controllers.UserAccountController",
+    "Method": "Get",
+    "RelativePath": "api/UserAccount",
+    "HttpMethod": "GET",
+    "IsController": true,
+    "Order": 0,
+    "Parameters": [],
+    "ReturnTypes": [
+      {
+        "Type": "System.Collections.Generic.List\u00601[[EmployeeManagementAPI.Models.Entities.UserAccount, EmployeeManagementAPI, Version=1.0.0.0, Culture=neutral, PublicKeyToken=null]]",
+        "MediaTypes": [
+          "text/plain",
+          "application/json",
+          "text/json"
+        ],
+        "StatusCode": 200
+      }
+    ]
+  },
+  {
+    "ContainingType": "EmployeeManagementAPI.Controllers.UserAccountController",
+    "Method": "Create",
+    "RelativePath": "api/UserAccount",
+    "HttpMethod": "POST",
+    "IsController": true,
+    "Order": 0,
+    "Parameters": [
+      {
+        "Name": "userAccount",
+        "Type": "EmployeeManagementAPI.Models.Entities.UserAccount",
+        "IsRequired": true
+      }
+    ],
+    "ReturnTypes": []
+  },
+  {
+    "ContainingType": "EmployeeManagementAPI.Controllers.UserAccountController",
+    "Method": "Update",
+    "RelativePath": "api/UserAccount",
+    "HttpMethod": "PUT",
+    "IsController": true,
+    "Order": 0,
+    "Parameters": [
+      {
+        "Name": "userAccount",
+        "Type": "EmployeeManagementAPI.Models.Entities.UserAccount",
+        "IsRequired": true
+      }
+    ],
+    "ReturnTypes": []
+  },
+  {
+    "ContainingType": "EmployeeManagementAPI.Controllers.UserAccountController",
+    "Method": "GetById",
+    "RelativePath": "api/UserAccount/{id}",
+    "HttpMethod": "GET",
+    "IsController": true,
+    "Order": 0,
+    "Parameters": [
+      {
+        "Name": "id",
+        "Type": "System.Int32",
+        "IsRequired": true
+      }
+    ],
+    "ReturnTypes": [
+      {
+        "Type": "EmployeeManagementAPI.Models.Entities.UserAccount",
+        "MediaTypes": [
+          "text/plain",
+          "application/json",
+          "text/json"
+        ],
+        "StatusCode": 200
+      }
+    ]
+  },
+  {
+    "ContainingType": "EmployeeManagementAPI.Controllers.UserAccountController",
+    "Method": "Delete",
+    "RelativePath": "api/UserAccount/{id}",
+    "HttpMethod": "DELETE",
+    "IsController": true,
+    "Order": 0,
+    "Parameters": [
+      {
+        "Name": "id",
+        "Type": "System.Int32",
+        "IsRequired": true
+      }
+    ],
+    "ReturnTypes": []
   }
 ]

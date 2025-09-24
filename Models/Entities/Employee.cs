@@ -1,7 +1,7 @@
 ﻿using System.ComponentModel.DataAnnotations;
 using System.ComponentModel.DataAnnotations.Schema;
 
-namespace EmployeeManagementAPI.Models
+namespace EmployeeManagementAPI.Models.Entities
 {
     [Table("employee")]
     public class Employee

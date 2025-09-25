@@ -1,9 +1,11 @@
 ﻿
 Microsoft Visual Studio Solution File, Format Version 12.00
 # Visual Studio Version 17
-VisualStudioVersion = 17.14.36511.14 d17.14
+VisualStudioVersion = 17.14.36511.14
 MinimumVisualStudioVersion = 10.0.40219.1
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "EmployeeManagementAPI", "EmployeeManagementAPI.csproj", "{A6BA0E6F-D228-4144-8BE7-DD833535937A}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "EmployeeManagementAPI.Tests", "..\EmployeeManagementAPI.Tests\EmployeeManagementAPI.Tests.csproj", "{6F11D2DC-E72B-4216-A8CB-92B349296710}"
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
@@ -15,6 +17,10 @@ Global
 		{A6BA0E6F-D228-4144-8BE7-DD833535937A}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{A6BA0E6F-D228-4144-8BE7-DD833535937A}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{A6BA0E6F-D228-4144-8BE7-DD833535937A}.Release|Any CPU.Build.0 = Release|Any CPU
+		{6F11D2DC-E72B-4216-A8CB-92B349296710}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{6F11D2DC-E72B-4216-A8CB-92B349296710}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{6F11D2DC-E72B-4216-A8CB-92B349296710}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{6F11D2DC-E72B-4216-A8CB-92B349296710}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE

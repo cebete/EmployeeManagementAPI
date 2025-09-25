@@ -1,5 +1,6 @@
 ﻿using System.Text.RegularExpressions;
 using EmployeeManagementAPI.Data;
+using EmployeeManagementAPI.Models.Api;
 using EmployeeManagementAPI.Models.Entities;
 using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Http;
@@ -24,16 +25,16 @@ namespace EmployeeManagementAPI.Controllers
                 return false;
             }
 
-            var pattern = @"^[^@\s]+@[^@\s]+\.[^@\s]+$";z
+            var pattern = @"^[^@\s]+@[^@\s]+\.[^@\s]+$";
             return Regex.IsMatch(email, pattern, RegexOptions.IgnoreCase);
         }
 
         [HttpGet]
-        public async Task<ActionResult<IEnumerable<Employee>>> Get(
+        public async Task<ActionResult<PagedResult<Employee>>> Get(
             [FromQuery] string? sortBy = null,
             [FromQuery] string? order = "asc",
             [FromQuery] int pageNumber = 1,
-            [FromQuery] int pageSize = 10) // default ascending
+            [FromQuery] int pageSize = 10)
         {
             if (pageNumber < 0 || pageSize < 0)
             {
@@ -50,28 +51,24 @@ namespace EmployeeManagementAPI.Controllers
                         : query.OrderBy(e => e.Name);
                     break;
 
-                case "hireDate":
+                case "hiredate":
                     query = order.ToLower() == "desc"
                         ? query.OrderByDescending(e => e.HireDate)
                         : query.OrderBy(e => e.HireDate);
                     break;
 
                 default:
-                    // no sorting if sortBy is null/invalid
                     break;
             }
 
-            // Total count before applying
             var totalCount = await query.CountAsync();
 
-            // Paging
-
             var employees = await query
-                .Skip((pageNumber -1) * pageSize)
+                .Skip((pageNumber - 1) * pageSize)
                 .Take(pageSize)
                 .ToListAsync();
 
-            return Ok(new
+            return Ok(new PagedResult<Employee>
             {
                 TotalCount = totalCount,
                 PageNumber = pageNumber,
